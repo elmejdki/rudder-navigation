@@ -5,6 +5,10 @@
   outline: none;
 }
 
+:root {
+  --play-time: 500ms;
+}
+
 body {
   position: relative;
   height: 100vh;
@@ -34,6 +38,11 @@ body {
   background-color: #4ad6bd;
   border-radius: 35px;
   z-index: 100;
+  width: 50px;
+  right: calc(100vw/2 - 50px / 2);
+  transition-property: width, right;
+  transition-timing-function: ease-in-out;
+  transition-duration: var(--play-time);
 }
 
 button {
@@ -41,50 +50,6 @@ button {
   border-radius: 35px;
   border: none;
   padding: 10px;
-}
-
-#button1 {
-  background-color: #00a385;
-  position: absolute;
-  left: 20px;
-}
-
-#button2 {
-  background-color: #00a385;
-  position: absolute;
-  right: 20px;
-}
-
-.container.expand #button1 {
-  animation: left-button 1s 1 forwards;
-}
-
-.container.collapse #button1 {
-  animation: left-button 1s 1 reverse;
-}
-
-.container.expand #button2 {
-  animation: right-button 1s 1 forwards;
-}
-
-.container.collapse #button2 {
-  animation: right-button 1s 1 reverse;
-}
-
-.container.expand .menu {
-  animation: menu 1s 1 forwards;
-}
-
-.container.collapse .menu {
-  animation: menu 1s 1 reverse;
-}
-
-.container.expand #plus {
-  animation: plus 1s 1 forwards;
-}
-
-.container.collapse #plus {
-  animation: plus 1s 1 reverse;
 }
 
 .bg-icon {
@@ -124,48 +89,48 @@ button {
   background-image: url(./images/setup.png);
 }
 
-@keyframes right-button {
-  from {
-    transform: rotate(0deg);
-    right: 20px;
-  }
-
-  to {
-    transform: rotate(360deg);
-    right: -40px;
-  }
+#button1 {
+  background-color: #00a385;
+  position: absolute;
+  left: 20px;
+  transform: rotate(0deg);
+  left: 20px;
+  transition-duration: var(--play-time);
+  transition-timing-function: ease-in-out;
+  transition-property: transform, left;
 }
 
-@keyframes left-button {
-  from {
-    transform: rotate(0deg);
-    left: 20px;
-  }
-
-  to {
-    transform: rotate(-360deg);
-    left: -40px;
-  }
+#button2 {
+  background-color: #00a385;
+  position: absolute;
+  right: 20px;
+  transform: rotate(0deg);
+  right: 20px;
+  transition-duration: var(--play-time);
+  transition-timing-function: ease-in-out;
+  transition-property: transform, right;
 }
 
-@keyframes menu {
-  from {
-    width: 50px;
-    right: calc(100vw/2 - 50px / 2);
-  }
-
-  to {
-    width: 300px;
-    right: calc(100vw/2 - 300px / 2);
-  }
+#plus {
+  transition: transform var(--play-time) ease-in-out;
+  transform: rotate(0deg);
 }
 
-@keyframes plus {
-  from {
-    transform: rotate(0deg);
-  }
+.container.expand #button1 {
+  transform: rotate(-360deg);
+  left: -40px;
+}
 
-  to {
-    transform: rotate(-360deg);
-  }
+.container.expand #button2 {
+  transform: rotate(360deg);
+  right: -40px;
+}
+
+.container.expand .menu {
+  width: 300px;
+  right: calc(100vw/2 - 300px / 2);
+}
+
+.container.expand #plus {
+  transform: rotate(-315deg);
 }
